@@ -38,10 +38,12 @@ export default class Icon extends Component{
     render(){
         return(
 
+            <View>
             <Text onPress={this.props.onPress}
                   style={[{fontFamily:'iconfontim',fontSize:this.props.size,color: this.props.color},this.props.style]}>
                 {String.fromCharCode(this.props.icon)}
             </Text>
+            </View>
         )
     }
 

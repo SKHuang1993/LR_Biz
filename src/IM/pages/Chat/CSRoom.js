@@ -214,11 +214,10 @@ export default class CSRoom extends React.Component {
         //#TODO 这里要加上关于客服收到消息之后的通知。接着将消息处理为已读，同时将消息存到本地。函数里面的处理方法，也要重新修复的
         this.CSListener = RCTDeviceEventEmitter.addListener('OnCSChat',(message)=>{
 
-        //    Chat.setReadMessage(this.store.conversation);
 
-
-            Chat.saveConversationList(Chat.obj.CSConversations);
+            Chat.saveCSConversationList(Chat.obj.CSConversations);
             this.scrollToBottom(true);
+
 
 
         })
@@ -256,7 +255,7 @@ export default class CSRoom extends React.Component {
         //收到了客服发送的消息
         this.OnCSService_Chat = RCTDeviceEventEmitter.addListener('OnCSService_Chat', (message) => {
                 Chat.setReadMessage(this.store.conversation);
-                Chat.saveConversationList(Chat.obj.CSConversations);
+                Chat.saveCSConversationList(Chat.obj.CSConversations);
                 this.scrollToBottom(true);
             });
 
@@ -274,6 +273,8 @@ export default class CSRoom extends React.Component {
             //console.log(message);
            // this.store.reSend(message);
         });
+
+
         this.openImageViewer = RCTDeviceEventEmitter.addListener('OpenImageViewer', (message) => {
             this.store.initImageViewer(message);
             this.toggle();
@@ -296,13 +297,13 @@ export default class CSRoom extends React.Component {
 
                 //这里表示已读。在客服系统没所谓什么已读未读
               //  Chat.setReadMessage(this.store.conversation);
-                Chat.saveConversationList(Chat.obj.CSConversations);
+                Chat.saveCSConversationList(Chat.obj.CSConversations);
                 this.scrollToBottom(true);
             }
         });
        // Chat.setReadMessage(this.store.conversation);
 
-        Chat.saveConversationList(Chat.obj.CSConversations);
+        Chat.saveCSConversationList(Chat.obj.CSConversations);
     }
 
     componentWillUnmount() {

@@ -119,6 +119,7 @@ export class Chat extends Component {
     static  init = async(userCode, kickOff) => {
 
 
+
         if (Chat.obj.connectionState == 1) {
             //如果已经登陆过了，则直接return
             // console.log('如果已经登陆过了，则直接return');
@@ -472,7 +473,6 @@ export class Chat extends Component {
 
 
         } else{
-
 
             console.log('缓存里面没数据，去读历史数据')
             //目前每次都是去获取最新数据。接下来需要将这部分数据存到缓存里面去
@@ -2025,8 +2025,6 @@ export class Chat extends Component {
             rawData: CSConversationList
         })
 
-        console.log("这是是保存key=",key)
-        console.log("现在已经成功保存")
 
     }
 

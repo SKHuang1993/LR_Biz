@@ -9,6 +9,7 @@
 
 
 
+
 import { observer } from 'mobx-react/native';
 import {observable, autorun,computed,action} from 'mobx'
 import {Component} from 'react';
@@ -17,11 +18,11 @@ import React, { PropTypes } from 'react';
 import YQFNavBar from '../../components/yqfNavBar';
 
 
-
 import {Chat}  from '../../utils/chat'
 import ActivityIndicator from '../../components/activity-indicator/index'
 import CSUserRequestDetail from './CSUserRequestDetail'
 import CSRoom from '../Chat/CSRoom'
+import EmptyView  from '../../components/EmptyView';
 
 
 import {
@@ -49,6 +50,8 @@ let window={
 
 class ServiceListModel extends Component {
 
+
+    @observable isEmpty = Chat.obj.CSConversations.length<=0 ? true:false; //一开始不要设置为空
 
     @observable isLoading = false; // 跳转到聊天页面需要显示loading
 
@@ -166,9 +169,9 @@ export default class ServiceList extends Component {
 
     _DealRequest = (data,operation) =>{
 
-
         // console.log("处理客服会员  _DealRequest  ---data")
         // console.dir(data);
+
 
         if(operation == '查看'){
 
@@ -471,16 +474,12 @@ export default class ServiceList extends Component {
     }
 
 
-    renderLoading = ()=>{
 
 
-        if (this.store.loading) {
 
-            return <ActivityIndicator toast text={this.store.loadingText} animating={this.store.loading}/>
+    renderEmpty = () =>{
 
-        }
-
-        return null;
+            return         <EmptyView title={'当前暂无客服咨询请求'} icon={'0xe15c'}/>
 
     }
 
@@ -513,6 +512,15 @@ export default class ServiceList extends Component {
 
     }
 
+    renderContent = ()=>{
+
+        if (this.store.isEmpty){
+            return this.renderEmpty()
+        }
+        return this.renderListview()
+
+    }
+
 
     render = ()=>{
 
@@ -527,7 +535,10 @@ export default class ServiceList extends Component {
 
                 {this.renderLoading()}
 
-                {this.renderListview()}
+                {this.renderContent()}
+
+
+
 
 
             </View>

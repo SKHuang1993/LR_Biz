@@ -100,8 +100,48 @@ export  default  class YQFNavBar extends  Component{
 
         let iconCode = this.props.leftIcon ? this.props.leftIcon : '0xe66e';
 
+
+        //用户可能需要显示数字
         if(this.props.leftIcon){
-            return <Icon icon={iconCode} color={'#fff'} size={20} />
+
+            //如果有传数字的话，则需要
+            if(this.props.leftCount){
+
+                if (this.props.leftCount>0){
+
+                   var iconSize=18;
+                   var countStr  = this.props.leftCount.toString()
+
+                    return(
+
+                        <View>
+
+                            <Icon icon={iconCode}  color={'#fff'} size={20}>
+
+                            </Icon>
+
+                            <View style={{position:'absolute',right:-iconSize/2,top:-iconSize/2, width:iconSize,height:iconSize,borderRadius:iconSize/2,backgroundColor:'red',justifyContent:'center',alignItems:'center'}}>
+                                <Text style={{color:'#fff'}}>{countStr}</Text>
+                            </View>
+
+                        </View>
+
+                    )
+
+
+
+                }else{
+
+
+                }
+
+
+            }else{
+
+                return <Icon icon={iconCode} color={'#fff'} size={20} />
+            }
+
+
         }
 
       else  if (this.props.leftText) {

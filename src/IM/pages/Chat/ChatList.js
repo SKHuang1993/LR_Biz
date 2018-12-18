@@ -39,10 +39,7 @@ import FriendRecommend from '../Contact/FriendRecommend';
 
 import Multi_Contact from '../Contact/Multi_Contact';
 import ChatRoom from './ChatRoom';
-
-
 import ServiceList from '../CustomerService/ServiceList'
-import CSUserRequestDetailHistory from '../CustomerService/CSUserRequestDetailHistory'
 
 
 
@@ -82,6 +79,7 @@ export default class ChatList extends Component{
         });
 
     }
+
 
     componentWillUnmount() {
 
@@ -233,6 +231,10 @@ export default class ChatList extends Component{
 
     _renderNav(){
 
+
+
+
+
         //导航栏连接状态显示
         // let title =return(
         //
@@ -245,13 +247,16 @@ export default class ChatList extends Component{
         let title = '收取中...';
 
 
+
+
+
         if (Chat.obj.connectionState == 1)
 
-            //#TODO 测试完客服聊天，需要将title进行修改，现在数据是错的
            title = `消息` + (Chat.obj.totalUnReadMessage > 0 ? `(${Chat.obj.totalUnReadMessage})` : "");
 
         else if (Chat.obj.connectionState == 3)
             title = `消息` + "(未连接)";
+
 
 
         //  let isEmptyData = Chat.obj.isFinish && Chat.obj.conversations.length == 0;
@@ -277,10 +282,12 @@ export default class ChatList extends Component{
 
              return(
              <YQFNavBar title={title}
+              leftCount={Chat.obj.totalUnReadCSMessage}
              leftIcon={'0xe16f'}
              rightIcon={'0xe180'}
              navigator={this.props.navigator}
              onLeftClick={()=>{
+
              this._ToCustomService()
 
              }}
